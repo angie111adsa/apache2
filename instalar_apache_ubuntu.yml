@@ -1,0 +1,20 @@
+---
+- name: Instalar Apache en Ubuntu
+  hosts: all
+  become: yes  # Permite ejecutar comandos con permisos de superusuario
+  tasks:
+    - name: Actualizar los repositorios de apt
+      apt:
+        update_cache: yes
+
+    - name: Instalar Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Asegurarse de que el servicio Apache esté en funcionamiento
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
